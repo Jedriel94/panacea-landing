@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PANACEA — Excelencia en el Desarrollo Farmacéutico</title>
+  <meta name="description" content="Conectamos ciencia, acceso y ejecución para transformar la salud en México y Latinoamérica." />
+
+  <style>
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue:       #3B4FA8;
+      --teal:       #3DBFA8;
+      --white:      #FFFFFF;
+      --gray-bg:    #F5F7FA;
+      --dark:       #1A1A2E;
+      --blue-mid:   #2d3d8f;
+      --teal-dark:  #2fa08c;
+      --shadow:     0 4px 24px rgba(59,79,168,.12);
+      --shadow-lg:  0 8px 40px rgba(59,79,168,.18);
+      --radius:     12px;
+      --transition: .3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.25;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section--gray {
+      background: var(--gray-bg);
+    }
+
+    .section__tag {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    .section__title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .section__title--center {
+      text-align: center;
+    }
+
+    .section__subtitle {
+      font-size: 1.0625rem;
+      color: #555;
+      max-width: 640px;
+    }
+
+    .section__subtitle--center {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,.08);
+      padding: 14px 0;
+    }
+
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo */
+    .navbar__logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      transition: color var(--transition);
+    }
+
+    .navbar.scrolled .navbar__logo {
+      color: var(--blue);
+    }
+
+    .navbar__logo-icon {
+      font-size: 1.6rem;
+    }
+
+    /* Nav links */
+    .navbar__nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .navbar__nav a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.9);
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .navbar.scrolled .navbar__nav a {
+      color: var(--dark);
+    }
+
+    .navbar__nav a:hover {
+      color: var(--teal);
+    }
+
+    /* CTA button */
+    .navbar__cta {
+      font-size: .875rem !important;
+      font-weight: 600 !important;
+      color: var(--teal) !important;
+      border: 2px solid var(--teal) !important;
+      border-radius: 50px !important;
+      padding: 7px 20px !important;
+      transition: background var(--transition), color var(--transition) !important;
+    }
+
+    .navbar__cta:hover {
+      background: var(--teal) !important;
+      color: var(--white) !important;
+    }
+
+    /* Hamburger */
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .navbar__hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition), background var(--transition);
+    }
+
+    .navbar.scrolled .navbar__hamburger span {
+      background: var(--dark);
+    }
+
+    .navbar__hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .navbar__hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar__hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .navbar__menu-mobile {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+      padding: 16px 24px 24px;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .navbar__menu-mobile.open {
+      display: block;
+    }
+
+    .navbar__menu-mobile ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .navbar__menu-mobile a {
+      display: block;
+      padding: 10px 12px;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--dark);
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .navbar__menu-mobile a:hover {
+      background: var(--gray-bg);
+      color: var(--blue);
+    }
+
+    .navbar__menu-mobile .navbar__cta {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--teal) !important;
+      border: 2px solid var(--teal) !important;
+      padding: 8px 22px !important;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      background: linear-gradient(135deg, #1A1A2E 0%, #2d3d8f 45%, #3B4FA8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative circles */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: .07;
+      background: var(--teal);
+    }
+
+    .hero::before {
+      width: 600px;
+      height: 600px;
+      top: -200px;
+      right: -150px;
+    }
+
+    .hero::after {
+      width: 350px;
+      height: 350px;
+      bottom: -100px;
+      left: -80px;
+    }
+
+    .hero__content {
+      max-width: 720px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(61,191,168,.12);
+      border: 1px solid rgba(61,191,168,.3);
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .hero__title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: -.01em;
+    }
+
+    .hero__title span {
+      color: var(--teal);
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,.8);
+      margin-bottom: 44px;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .9375rem;
+      font-weight: 600;
+      padding: 14px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--teal {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .btn--teal:hover {
+      background: var(--teal-dark);
+      border-color: var(--teal-dark);
+      box-shadow: 0 6px 24px rgba(61,191,168,.35);
+    }
+
+    .btn--outline-white {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.6);
+    }
+
+    .btn--outline-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: var(--white);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: .5;
+      animation: bounce 2s infinite;
+    }
+
+    .hero__scroll span {
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .hero__scroll svg { color: var(--white); }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* =============================================
+       QUIÉNES SOMOS
+    ============================================= */
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about__text p {
+      font-size: 1.0625rem;
+      color: #4a4a6a;
+      margin-bottom: 24px;
+      line-height: 1.75;
+    }
+
+    .about__stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 36px;
+    }
+
+    .about__stat strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .about__stat span {
+      font-size: .85rem;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    /* Image placeholder */
+    .about__image {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .about__img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--blue) 0%, #3DBFA8 100%);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.5);
+      font-size: .875rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      gap: 12px;
+    }
+
+    .about__img-placeholder svg {
+      opacity: .35;
+    }
+
+    /* Floating accent card */
+    .about__accent-card {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .about__accent-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(61,191,168,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .about__accent-card-text strong {
+      display: block;
+      font-size: .95rem;
+      color: var(--dark);
+    }
+
+    .about__accent-card-text span {
+      font-size: .8rem;
+      color: #888;
+    }
+
+    /* =============================================
+       MISIÓN / PROPÓSITO / VISIÓN
+    ============================================= */
+    .mpv__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .mpv__card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .mpv__card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mpv__card-icon {
+      font-size: 2rem;
+      margin-bottom: 18px;
+    }
+
+    .mpv__card-title {
+      font-family: Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .mpv__card-text {
+      font-size: .9375rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .mpv__card--accent {
+      border-top: 4px solid var(--teal);
+    }
+
+    /* =============================================
+       FILOSOFÍA
+    ============================================= */
+    .philosophy__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .philosophy__card {
+      background: var(--white);
+      border: 1px solid #e8eaf2;
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .philosophy__card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--teal);
+    }
+
+    .philosophy__card-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(61,191,168,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .philosophy__card-body h3 {
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .philosophy__card-body p {
+      font-size: .9rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       SERVICIOS
+    ============================================= */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .service__card {
+      background: var(--white);
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      padding: 40px 30px;
+      cursor: default;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .service__card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--teal);
+    }
+
+    .service__card-num {
+      font-family: Georgia, serif;
+      font-size: 2.5rem;
+      color: rgba(61,191,168,.18);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .service__card-icon {
+      font-size: 2rem;
+      margin-bottom: 18px;
+    }
+
+    .service__card h3 {
+      font-family: Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+
+    .service__card p {
+      font-size: .9375rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .service__card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--teal);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .service__card:hover .service__card-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* =============================================
+       SOCIOS
+    ============================================= */
+    .partners__tagline {
+      font-size: 1.125rem;
+      color: #555;
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 52px;
+      line-height: 1.7;
+    }
+
+    .partners__logos {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .partner__logo-placeholder {
+      width: 160px;
+      height: 80px;
+      background: var(--gray-bg);
+      border: 1.5px solid #e0e3ef;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #aaa;
+      letter-spacing: .06em;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+
+    .partner__logo-placeholder:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 16px rgba(61,191,168,.15);
+    }
+
+    .partners__cta {
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .btn--blue {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+
+    .btn--blue:hover {
+      background: var(--blue-mid);
+      border-color: var(--blue-mid);
+      box-shadow: 0 6px 24px rgba(59,79,168,.3);
+    }
+
+    /* =============================================
+       CONTACTO
+    ============================================= */
+    .contact {
+      background: linear-gradient(135deg, #1A1A2E 0%, #2d3d8f 45%, #3B4FA8 100%);
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(61,191,168,.06);
+      top: -200px;
+      right: -100px;
+    }
+
+    .contact__header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .contact__header .section__tag { color: var(--teal); }
+
+    .contact__header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .contact__header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,.7);
+    }
+
+    .contact__form-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 44px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form__group {
+      margin-bottom: 20px;
+    }
+
+    .form__group label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 8px;
+    }
+
+    .form__group input,
+    .form__group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(255,255,255,.15);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: .9375rem;
+      font-family: inherit;
+      transition: border-color var(--transition), background var(--transition);
+      outline: none;
+    }
+
+    .form__group input::placeholder,
+    .form__group textarea::placeholder {
+      color: rgba(255,255,255,.35);
+    }
+
+    .form__group input:focus,
+    .form__group textarea:focus {
+      border-color: var(--teal);
+      background: rgba(255,255,255,.12);
+    }
+
+    .form__group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form__submit {
+      width: 100%;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 15px;
+      margin-top: 8px;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.75);
+      padding: 72px 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+    }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer__tagline {
+      font-size: .9rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.65;
+      max-width: 240px;
+      margin-bottom: 28px;
+    }
+
+    .footer__divider-dot {
+      width: 36px;
+      height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+    }
+
+    .footer__col-title {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 20px;
+    }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__links a {
+      font-size: .9rem;
+      color: rgba(255,255,255,.6);
+      transition: color var(--transition);
+    }
+
+    .footer__links a:hover {
+      color: var(--teal);
+    }
+
+    /* Social icons */
+    .footer__social {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .875rem;
+      color: rgba(255,255,255,.6);
+      transition: color var(--transition);
+    }
+
+    .footer__social-link:hover {
+      color: var(--teal);
+    }
+
+    .footer__social-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .footer__social-link:hover .footer__social-icon {
+      background: rgba(61,191,168,.15);
+    }
+
+    /* Footer bottom bar */
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__bottom p {
+      font-size: .825rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    .footer__bottom a {
+      font-size: .825rem;
+      color: rgba(255,255,255,.4);
+      transition: color var(--transition);
+    }
+
+    .footer__bottom a:hover { color: var(--teal); }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .about__grid { gap: 40px; }
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+
+      /* Navbar mobile */
+      .navbar__nav { display: none; }
+      .navbar__hamburger { display: flex; }
+
+      /* Hero */
+      .hero { padding: 130px 0 80px; }
+
+      /* About */
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about__image { order: -1; }
+      .about__accent-card { display: none; }
+
+      /* MPV */
+      .mpv__grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* Philosophy */
+      .philosophy__grid { grid-template-columns: 1fr; }
+
+      /* Services */
+      .services__grid { grid-template-columns: 1fr; }
+
+      /* Form */
+      .form__row { grid-template-columns: 1fr; }
+      .contact__form-wrap { padding: 32px 24px; }
+
+      /* Footer */
+      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__actions { flex-direction: column; }
+      .btn { justify-content: center; }
+      .partners__logos { gap: 14px; }
+      .partner__logo-placeholder { width: 140px; height: 70px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =============================================
+       NAVBAR
+  ============================================= -->
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar__inner">
+
+        <!-- Logo -->
+        <a href="#inicio" class="navbar__logo">
+          <span class="navbar__logo-icon">🧬</span>
+          PANACEA
+        </a>
+
+        <!-- Desktop nav -->
+        <nav>
+          <ul class="navbar__nav">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#mision">Misión</a></li>
+            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#socios">Socios</a></li>
+            <li><a href="#contacto" class="navbar__cta">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <!-- Hamburger -->
+        <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="navbar__menu-mobile" id="mobileMenu">
+        <ul>
+          <li><a href="#inicio" class="mobile-link">Inicio</a></li>
+          <li><a href="#quienes-somos" class="mobile-link">Quiénes Somos</a></li>
+          <li><a href="#mision" class="mobile-link">Misión</a></li>
+          <li><a href="#filosofia" class="mobile-link">Filosofía</a></li>
+          <li><a href="#servicios" class="mobile-link">Servicios</a></li>
+          <li><a href="#socios" class="mobile-link">Socios</a></li>
+          <li><a href="#contacto" class="mobile-link navbar__cta">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =============================================
+       HERO
+  ============================================= -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero__content fade-in">
+        <div class="hero__tag">
+          🧬 Laboratorio Farmacéutico Mexicano
+        </div>
+        <h1 class="hero__title">
+          Excelencia en el<br/>
+          <span>Desarrollo Farmacéutico</span>
+        </h1>
+        <p class="hero__subtitle">
+          Conectamos ciencia, acceso y ejecución para transformar
+          la salud en México y Latinoamérica.
+        </p>
+        <div class="hero__actions">
+          <a href="#quienes-somos" class="btn btn--teal">
+            Conoce más
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#servicios" class="btn btn--outline-white">
+            Nuestros Servicios
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       QUIÉNES SOMOS
+  ============================================= -->
+  <section class="section" id="quienes-somos">
+    <div class="container">
+      <div class="about__grid">
+
+        <!-- Text -->
+        <div class="about__text fade-in">
+          <span class="section__tag">Quiénes Somos</span>
+          <h2 class="section__title">Ciencia aplicada<br/>al servicio de la salud</h2>
+          <p>
+            Somos una empresa comprometida con la excelencia en el desarrollo
+            farmacéutico. Integramos ciencia aplicada, acceso equitativo y ejecución
+            de alto nivel para acelerar soluciones de salud que impactan vidas en
+            México y Latinoamérica.
+          </p>
+          <p>
+            Nuestro equipo multidisciplinario combina décadas de experiencia en
+            regulación sanitaria, investigación clínica y estrategia comercial,
+            permitiéndonos acompañar a nuestros socios en cada etapa del ciclo
+            de vida farmacéutico.
+          </p>
+          <div class="about__stats">
+            <div class="about__stat">
+              <strong>+15</strong>
+              <span>Años de experiencia</span>
+            </div>
+            <div class="about__stat">
+              <strong>LatAm</strong>
+              <span>Presencia regional</span>
+            </div>
+            <div class="about__stat">
+              <strong>100%</strong>
+              <span>Enfoque en salud</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="about__image fade-in">
+          <div class="about__img-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+            </svg>
+            Imagen corporativa
+          </div>
+          <!-- Floating card -->
+          <div class="about__accent-card">
+            <div class="about__accent-card-icon">🧬</div>
+            <div class="about__accent-card-text">
+              <strong>Innovación constante</strong>
+              <span>Soluciones de vanguardia</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       MISIÓN, PROPÓSITO Y VISIÓN
+  ============================================= -->
+  <section class="section section--gray" id="mision">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;">
+        <span class="section__tag">Nuestra Razón de Ser</span>
+        <h2 class="section__title section__title--center">Misión, Propósito y Visión</h2>
+        <p class="section__subtitle section__subtitle--center">
+          Los pilares que guían cada decisión y proyecto en PANACEA.
+        </p>
+      </div>
+
+      <div class="mpv__grid">
+        <!-- Misión -->
+        <div class="mpv__card mpv__card--accent fade-in">
+          <div class="mpv__card-icon">🚩</div>
+          <h3 class="mpv__card-title">Misión</h3>
+          <p class="mpv__card-text">
+            Conectar ciencia, acceso y ejecución para acelerar la llegada de
+            soluciones farmacéuticas innovadoras que mejoren la salud y la calidad
+            de vida de personas.
+          </p>
+        </div>
+
+        <!-- Propósito -->
+        <div class="mpv__card mpv__card--accent fade-in">
+          <div class="mpv__card-icon">🎯</div>
+          <h3 class="mpv__card-title">Propósito</h3>
+          <p class="mpv__card-text">
+            Reducir la brecha entre innovación científica y acceso real en los
+            sistemas de salud de México y Latinoamérica, generando impacto
+            sostenible en pacientes, instituciones y socios estratégicos.
+          </p>
+        </div>
+
+        <!-- Visión -->
+        <div class="mpv__card mpv__card--accent fade-in">
+          <div class="mpv__card-icon">👁️</div>
+          <h3 class="mpv__card-title">Visión</h3>
+          <p class="mpv__card-text">
+            Construir un ecosistema de alianzas internacionales que acelere el
+            acceso a terapias de alto valor clínico, fortaleciendo los sistemas
+            de salud de la región.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       NUESTRA FILOSOFÍA
+  ============================================= -->
+  <section class="section" id="filosofia">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;">
+        <span class="section__tag">Nuestra Filosofía</span>
+        <h2 class="section__title section__title--center">Los valores que nos definen</h2>
+        <p class="section__subtitle section__subtitle--center">
+          Principios que orientan nuestra práctica profesional y nuestro
+          compromiso con la salud.
+        </p>
+      </div>
+
+      <div class="philosophy__grid">
+        <!-- Ciencia Aplicada -->
+        <div class="philosophy__card fade-in">
+          <div class="philosophy__card-icon">🔬</div>
+          <div class="philosophy__card-body">
+            <h3>Ciencia Aplicada</h3>
+            <p>Integramos el rigor científico en cada etapa del desarrollo de
+            soluciones de salud.</p>
+          </div>
+        </div>
+
+        <!-- Acceso y Equidad -->
+        <div class="philosophy__card fade-in">
+          <div class="philosophy__card-icon">🌎</div>
+          <div class="philosophy__card-body">
+            <h3>Acceso y Equidad</h3>
+            <p>Nos comprometemos con la disponibilidad y accesibilidad de nuestros
+            productos para todos.</p>
+          </div>
+        </div>
+
+        <!-- Ejecución y Resultados -->
+        <div class="philosophy__card fade-in">
+          <div class="philosophy__card-icon">📊</div>
+          <div class="philosophy__card-body">
+            <h3>Ejecución y Resultados</h3>
+            <p>Contamos con capacidades operativas sólidas que garantizan
+            resultados medibles.</p>
+          </div>
+        </div>
+
+        <!-- Innovación en Salud -->
+        <div class="philosophy__card fade-in">
+          <div class="philosophy__card-icon">💡</div>
+          <div class="philosophy__card-body">
+            <h3>Innovación en Salud</h3>
+            <p>Adoptamos tendencias tecnológicas y científicas para anticipar
+            el futuro de la salud.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       SERVICIOS
+  ============================================= -->
+  <section class="section section--gray" id="servicios">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;">
+        <span class="section__tag">Lo Que Hacemos</span>
+        <h2 class="section__title section__title--center">Nuestros Servicios</h2>
+        <p class="section__subtitle section__subtitle--center">
+          Soluciones integrales para cada etapa del desarrollo y acceso
+          de terapias farmacéuticas.
+        </p>
+      </div>
+
+      <div class="services__grid">
+        <!-- Desarrollo Farmacéutico -->
+        <div class="service__card fade-in">
+          <div class="service__card-num">01</div>
+          <div class="service__card-icon">⚗️</div>
+          <h3>Desarrollo Farmacéutico</h3>
+          <p>Servicios integrales para el desarrollo de medicamentos y soluciones
+          terapéuticas de alta calidad.</p>
+          <span class="service__card-link">
+            Saber más
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+
+        <!-- Consultoría Científica -->
+        <div class="service__card fade-in">
+          <div class="service__card-num">02</div>
+          <div class="service__card-icon">🧠</div>
+          <h3>Consultoría Científica</h3>
+          <p>Acompañamiento experto en estrategia regulatoria, científica
+          y comercial.</p>
+          <span class="service__card-link">
+            Saber más
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+
+        <!-- Acceso al Mercado -->
+        <div class="service__card fade-in">
+          <div class="service__card-num">03</div>
+          <div class="service__card-icon">🏥</div>
+          <h3>Acceso al Mercado</h3>
+          <p>Facilitamos el ingreso de terapias innovadoras a los sistemas de
+          salud públicos y privados.</p>
+          <span class="service__card-link">
+            Saber más
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       SOCIOS ESTRATÉGICOS
+  ============================================= -->
+  <section class="section" id="socios">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;">
+        <span class="section__tag">Alianzas</span>
+        <h2 class="section__title section__title--center">Socios Estratégicos</h2>
+      </div>
+      <p class="partners__tagline fade-in">
+        En búsqueda permanente de aliados estratégicos que compartan nuestro
+        propósito e ideales, para juntos construir el futuro de la salud.
+      </p>
+      <div class="partners__logos fade-in">
+        <div class="partner__logo-placeholder">Socio 1</div>
+        <div class="partner__logo-placeholder">Socio 2</div>
+        <div class="partner__logo-placeholder">Socio 3</div>
+        <div class="partner__logo-placeholder">Socio 4</div>
+        <div class="partner__logo-placeholder">Socio 5</div>
+      </div>
+      <div class="partners__cta fade-in">
+        <a href="#contacto" class="btn btn--blue">
+          Conviértete en socio
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       CONTACTO
+  ============================================= -->
+  <section class="contact" id="contacto">
+    <div class="container">
+      <div class="contact__header fade-in">
+        <span class="section__tag">Hablemos</span>
+        <h2>¿Listo para colaborar?</h2>
+        <p>Escríbenos y un miembro de nuestro equipo se pondrá en contacto contigo.</p>
+      </div>
+
+      <div class="contact__form-wrap fade-in">
+        <form id="contactForm" novalidate>
+          <div class="form__row">
+            <div class="form__group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej. María García" required />
+            </div>
+            <div class="form__group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="correo@empresa.com" required />
+            </div>
+          </div>
+
+          <div class="form__group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+52 55 1234 5678" />
+          </div>
+
+          <div class="form__group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--teal form__submit">
+            Enviar mensaje
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="footer__logo">
+            🧬 PANACEA
+          </div>
+          <p class="footer__tagline">
+            Transformando la salud de México y Latinoamérica a través de
+            la ciencia, el acceso y la ejecución.
+          </p>
+          <div class="footer__divider-dot"></div>
+        </div>
+
+        <!-- Col 2: General -->
+        <div>
+          <p class="footer__col-title">General</p>
+          <ul class="footer__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#socios">Socios</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Empresa -->
+        <div>
+          <p class="footer__col-title">Empresa</p>
+          <ul class="footer__links">
+            <li><a href="#mision">Misión</a></li>
+            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#">Aviso de Privacidad</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Síguenos -->
+        <div>
+          <p class="footer__col-title">Síguenos</p>
+          <div class="footer__social">
+
+            <!-- LinkedIn -->
+            <a href="#" class="footer__social-link" aria-label="LinkedIn">
+              <span class="footer__social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </span>
+              LinkedIn
+            </a>
+
+            <!-- Instagram -->
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <span class="footer__social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </span>
+              Instagram
+            </a>
+
+            <!-- Facebook -->
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <span class="footer__social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </span>
+              Facebook
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer__bottom">
+        <p>© 2026 Panacea. Todos los derechos reservados.</p>
+        <a href="#">Aviso de Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- =============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    // -----------------------------------------------
+    // Navbar: scroll effect
+    // -----------------------------------------------
+    const navbar = document.getElementById('navbar');
+
+    function handleNavbarScroll() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+
+    // -----------------------------------------------
+    // Hamburger menu
+    // -----------------------------------------------
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // -----------------------------------------------
+    // Fade-in on scroll (IntersectionObserver)
+    // -----------------------------------------------
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger children within the same parent
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    // Add stagger delays to grid children
+    document.querySelectorAll('.mpv__grid, .philosophy__grid, .services__grid').forEach(grid => {
+      grid.querySelectorAll('.fade-in').forEach((el, i) => {
+        el.dataset.delay = i * 100;
+      });
+    });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // -----------------------------------------------
+    // Hero: initial visibility
+    // -----------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroContent = document.querySelector('.hero .fade-in');
+      if (heroContent) {
+        setTimeout(() => heroContent.classList.add('visible'), 200);
+      }
+    });
+
+    // -----------------------------------------------
+    // Contact form: basic validation + feedback
+    // -----------------------------------------------
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nombre  = document.getElementById('nombre').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      if (!nombre || !email || !mensaje) {
+        showFormMessage('Por favor completa los campos obligatorios.', 'error');
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showFormMessage('Ingresa un correo electrónico válido.', 'error');
+        return;
+      }
+
+      // Simulate submission
+      const submitBtn = contactForm.querySelector('.form__submit');
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        contactForm.reset();
+        submitBtn.textContent = 'Mensaje enviado ✓';
+        submitBtn.style.background = '#27ae60';
+        submitBtn.style.borderColor = '#27ae60';
+
+        setTimeout(() => {
+          submitBtn.innerHTML = 'Enviar mensaje <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+          submitBtn.disabled = false;
+          submitBtn.style.background = '';
+          submitBtn.style.borderColor = '';
+        }, 3000);
+      }, 1200);
+    });
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showFormMessage(msg, type) {
+      // Remove existing messages
+      const existing = contactForm.querySelector('.form-msg');
+      if (existing) existing.remove();
+
+      const el = document.createElement('p');
+      el.className = 'form-msg';
+      el.textContent = msg;
+      el.style.cssText = `
+        margin-top: 12px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: .875rem;
+        font-weight: 500;
+        background: ${type === 'error' ? 'rgba(231,76,60,.15)' : 'rgba(39,174,96,.15)'};
+        color: ${type === 'error' ? '#e74c3c' : '#27ae60'};
+        border: 1px solid ${type === 'error' ? 'rgba(231,76,60,.3)' : 'rgba(39,174,96,.3)'};
+      `;
+      contactForm.appendChild(el);
+
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    // -----------------------------------------------
+    // Active nav link on scroll
+    // -----------------------------------------------
+    const sections = document.querySelectorAll('section[id], .contact[id]');
+    const navLinks = document.querySelectorAll('.navbar__nav a:not(.navbar__cta)');
+
+    const activeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.style.color = '';
+          });
+          const active = document.querySelector(`.navbar__nav a[href="#${entry.target.id}"]`);
+          if (active) active.style.color = 'var(--teal)';
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => activeObserver.observe(s));
+  </script>
+
+</body>
+</html>
