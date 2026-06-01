@@ -478,17 +478,8 @@
     .about__img-placeholder {
       width: 100%;
       aspect-ratio: 4/3;
-      background: linear-gradient(135deg, var(--blue) 0%, #3DBFA8 100%);
       border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,.5);
-      font-size: .875rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      gap: 12px;
+      overflow: hidden;
     }
 
     .about__img-placeholder svg {
@@ -1239,111 +1230,8 @@
 
         <!-- Image -->
         <div class="about__image fade-in">
-          <div class="about__img-placeholder" style="background: linear-gradient(145deg, #0B2A5C 0%, #1a4080 40%, #2EAAB0 100%); padding: 0; overflow: hidden;">
-            <svg viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
-              <defs>
-                <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#2EAAB0" stop-opacity="0.3"/>
-                  <stop offset="100%" stop-color="#2EAAB0" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#4FC3F7" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#4FC3F7" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-
-              <!-- Fondo con puntos de luz -->
-              <circle cx="420" cy="80" r="120" fill="url(#glow1)"/>
-              <circle cx="100" cy="300" r="100" fill="url(#glow2)"/>
-
-              <!-- Grid de puntos decorativos -->
-              <g opacity="0.15" fill="#ffffff">
-                <circle cx="40" cy="40" r="2"/><circle cx="80" cy="40" r="2"/><circle cx="120" cy="40" r="2"/>
-                <circle cx="40" cy="80" r="2"/><circle cx="80" cy="80" r="2"/><circle cx="120" cy="80" r="2"/>
-                <circle cx="400" cy="320" r="2"/><circle cx="440" cy="320" r="2"/><circle cx="480" cy="320" r="2"/>
-                <circle cx="400" cy="360" r="2"/><circle cx="440" cy="360" r="2"/><circle cx="480" cy="360" r="2"/>
-              </g>
-
-              <!-- Mesa de laboratorio -->
-              <rect x="60" y="280" width="400" height="12" rx="6" fill="#1a3a6e" opacity="0.8"/>
-
-              <!-- Matraz Erlenmeyer izquierdo -->
-              <g transform="translate(95, 130)">
-                <path d="M30 0 L30 80 L5 140 L55 140 Z" fill="none" stroke="#2EAAB0" stroke-width="3" stroke-linejoin="round"/>
-                <path d="M22 0 L38 0" stroke="#2EAAB0" stroke-width="3" stroke-linecap="round"/>
-                <!-- Líquido -->
-                <path d="M8 115 Q30 108 52 115 L55 140 L5 140 Z" fill="#2EAAB0" opacity="0.6"/>
-                <!-- Burbujas -->
-                <circle cx="20" cy="125" r="3" fill="#4FC3F7" opacity="0.7"/>
-                <circle cx="35" cy="118" r="2" fill="#4FC3F7" opacity="0.5"/>
-                <circle cx="45" cy="128" r="2.5" fill="#4FC3F7" opacity="0.6"/>
-              </g>
-
-              <!-- Tubo de ensayo centro-izquierdo -->
-              <g transform="translate(200, 100)">
-                <rect x="10" y="0" width="20" height="90" rx="10" fill="none" stroke="#7EC8E3" stroke-width="2.5"/>
-                <rect x="10" y="55" width="20" height="35" rx="10" fill="#7EC8E3" opacity="0.5"/>
-                <line x1="5" y1="10" x2="35" y2="10" stroke="#7EC8E3" stroke-width="2" opacity="0.4"/>
-                <circle cx="20" cy="65" r="3" fill="white" opacity="0.4"/>
-              </g>
-
-              <!-- Molécula central (DNA / molécula) -->
-              <g transform="translate(270, 80)">
-                <!-- Eje izquierdo DNA -->
-                <path d="M0 0 C20 40 -20 80 0 120 C20 160 -20 200 0 240" fill="none" stroke="#2EAAB0" stroke-width="2.5" opacity="0.9"/>
-                <!-- Eje derecho DNA -->
-                <path d="M40 0 C20 40 60 80 40 120 C20 160 60 200 40 240" fill="none" stroke="#2EAAB0" stroke-width="2.5" opacity="0.9"/>
-                <!-- Escalones DNA -->
-                <line x1="3" y1="24" x2="37" y2="24" stroke="#4FC3F7" stroke-width="2" opacity="0.8"/>
-                <line x1="-8" y1="48" x2="48" y2="48" stroke="#4FC3F7" stroke-width="2" opacity="0.7"/>
-                <line x1="-5" y1="72" x2="45" y2="72" stroke="#4FC3F7" stroke-width="2" opacity="0.8"/>
-                <line x1="3" y1="96" x2="37" y2="96" stroke="#4FC3F7" stroke-width="2" opacity="0.7"/>
-                <line x1="-8" y1="120" x2="48" y2="120" stroke="#4FC3F7" stroke-width="2" opacity="0.8"/>
-                <line x1="-5" y1="144" x2="45" y2="144" stroke="#4FC3F7" stroke-width="2" opacity="0.7"/>
-                <line x1="3" y1="168" x2="37" y2="168" stroke="#4FC3F7" stroke-width="2" opacity="0.8"/>
-                <line x1="-8" y1="192" x2="48" y2="192" stroke="#4FC3F7" stroke-width="2" opacity="0.7"/>
-                <line x1="-5" y1="216" x2="45" y2="216" stroke="#4FC3F7" stroke-width="2" opacity="0.8"/>
-                <!-- Nodos -->
-                <circle cx="0" cy="24" r="4" fill="#2EAAB0"/><circle cx="40" cy="24" r="4" fill="#2EAAB0"/>
-                <circle cx="-8" cy="48" r="4" fill="#4FC3F7"/><circle cx="48" cy="48" r="4" fill="#4FC3F7"/>
-                <circle cx="-5" cy="72" r="4" fill="#2EAAB0"/><circle cx="45" cy="72" r="4" fill="#2EAAB0"/>
-                <circle cx="3" cy="96" r="4" fill="#4FC3F7"/><circle cx="37" cy="96" r="4" fill="#4FC3F7"/>
-                <circle cx="-8" cy="120" r="4" fill="#2EAAB0"/><circle cx="48" cy="120" r="4" fill="#2EAAB0"/>
-                <circle cx="-5" cy="144" r="4" fill="#4FC3F7"/><circle cx="45" cy="144" r="4" fill="#4FC3F7"/>
-                <circle cx="3" cy="168" r="4" fill="#2EAAB0"/><circle cx="37" cy="168" r="4" fill="#2EAAB0"/>
-                <circle cx="-8" cy="192" r="4" fill="#4FC3F7"/><circle cx="48" cy="192" r="4" fill="#4FC3F7"/>
-              </g>
-
-              <!-- Microscopio derecho -->
-              <g transform="translate(370, 120)">
-                <!-- Ocular -->
-                <rect x="30" y="0" width="12" height="30" rx="6" fill="#7EC8E3" opacity="0.9"/>
-                <!-- Brazo -->
-                <path d="M36 30 L36 60 L20 60" fill="none" stroke="#7EC8E3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Cuerpo -->
-                <rect x="12" y="60" width="28" height="50" rx="6" fill="#2EAAB0" opacity="0.7"/>
-                <!-- Base -->
-                <rect x="4" y="110" width="44" height="10" rx="5" fill="#4FC3F7" opacity="0.6"/>
-                <!-- Objetivo -->
-                <rect x="22" y="108" width="8" height="20" rx="4" fill="#7EC8E3" opacity="0.8"/>
-                <!-- Platina -->
-                <rect x="8" y="128" width="36" height="6" rx="3" fill="#2EAAB0" opacity="0.5"/>
-              </g>
-
-              <!-- Partículas flotantes -->
-              <circle cx="170" cy="70" r="4" fill="#2EAAB0" opacity="0.6"/>
-              <circle cx="450" cy="200" r="5" fill="#4FC3F7" opacity="0.5"/>
-              <circle cx="80" cy="200" r="3" fill="#7EC8E3" opacity="0.4"/>
-              <circle cx="490" cy="120" r="3" fill="#2EAAB0" opacity="0.5"/>
-              <circle cx="140" cy="340" r="4" fill="#4FC3F7" opacity="0.4"/>
-
-              <!-- Líneas de conexión decorativas -->
-              <line x1="170" y1="70" x2="200" y2="100" stroke="#2EAAB0" stroke-width="1" opacity="0.3"/>
-              <line x1="450" y1="200" x2="420" y2="180" stroke="#4FC3F7" stroke-width="1" opacity="0.3"/>
-
-              <!-- Texto inferior -->
-              <text x="260" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="white" opacity="0.5" letter-spacing="3">CIENCIA · ACCESO · EJECUCIÓN</text>
-            </svg>
+          <div class="about__img-placeholder" style="padding:0; overflow:hidden; background:none;">
+            <img src="assets/about-corporativa.jpg" alt="Laboratorio farmacéutico PANACEA" style="width:100%; height:100%; object-fit:cover; display:block;">
           </div>
           <!-- Floating card -->
           <div class="about__accent-card">
