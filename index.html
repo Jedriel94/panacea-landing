@@ -1002,52 +1002,109 @@
     /* =============================================
        RESPONSIVE
     ============================================= */
+    /* ── TABLET (≤1024px) ── */
     @media (max-width: 1024px) {
+      .container { padding: 0 32px; }
       .about__grid { gap: 40px; }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .mpv__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .philosophy__grid { grid-template-columns: repeat(2, 1fr); }
       .footer__grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .partners__logos { gap: 20px; }
+      .partner__logo-card { min-width: 160px; height: 120px; }
     }
 
+    /* ── MÓVIL GRANDE (≤768px) ── */
     @media (max-width: 768px) {
-      .section { padding: 72px 0; }
+      .container { padding: 0 20px; }
+      .section { padding: 60px 0; }
 
-      /* Navbar mobile */
+      /* Navbar */
       .navbar__nav { display: none; }
       .navbar__hamburger { display: flex; }
+      .navbar__inner { padding: 0 4px; }
 
       /* Hero */
-      .hero { padding: 130px 0 80px; }
+      .hero { padding: 110px 0 70px; text-align: center; }
+      .hero__tag { margin: 0 auto 16px; }
+      .hero__title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+      .hero__subtitle { font-size: 1rem; margin: 0 auto 32px; }
+      .hero__actions { flex-direction: column; align-items: center; gap: 12px; }
+      .hero__actions .btn { width: 100%; max-width: 280px; justify-content: center; }
+      .hero__scroll { display: none; }
+      .hero__bg-shape { display: none; }
 
       /* About */
-      .about__grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .about__image { order: -1; }
+      .about__grid { grid-template-columns: 1fr; gap: 36px; }
+      .about__image { order: -1; max-height: 260px; overflow: hidden; border-radius: 16px; }
       .about__accent-card { display: none; }
+      .about__stats { justify-content: center; gap: 24px; }
 
       /* MPV */
-      .mpv__grid { grid-template-columns: 1fr; gap: 20px; }
+      .mpv__grid { grid-template-columns: 1fr; gap: 16px; }
 
       /* Philosophy */
-      .philosophy__grid { grid-template-columns: 1fr; }
+      .philosophy__grid { grid-template-columns: 1fr; gap: 16px; }
 
       /* Services */
-      .services__grid { grid-template-columns: 1fr; }
+      .services__grid { grid-template-columns: 1fr; gap: 20px; }
+      .service__card { padding: 28px 24px; }
 
-      /* Form */
+      /* Partners */
+      .partners__logos { 
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .partner__logo-card { 
+        min-width: unset;
+        width: 100%;
+        height: 100px;
+        padding: 16px;
+      }
+      .partner__logo-card img { max-height: 70px; }
+
+      /* Contact */
       .form__row { grid-template-columns: 1fr; }
-      .contact__form-wrap { padding: 32px 24px; }
+      .contact__form-wrap { padding: 28px 20px; }
+      .contact__grid { grid-template-columns: 1fr; gap: 32px; }
 
       /* Footer */
-      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer__bottom { flex-direction: column; text-align: center; }
+      .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer__bottom { flex-direction: column; text-align: center; gap: 8px; }
+      .footer__brand { max-width: 100%; }
     }
 
+    /* ── MÓVIL PEQUEÑO (≤480px) ── */
     @media (max-width: 480px) {
-      .hero__actions { flex-direction: column; }
-      .btn { justify-content: center; }
-      .partners__logos { gap: 16px; }
-      .partner__logo-card { min-width: 140px; height: 84px; padding: 16px 20px; }
+      .container { padding: 0 16px; }
+      .section { padding: 48px 0; }
+
+      /* Hero */
+      .hero { padding: 100px 0 60px; }
+      .hero__title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+
+      /* Navbar */
+      .navbar__logo { font-size: 1.2rem; }
+      .mobile-menu { padding: 16px; }
+
+      /* Partners: 1 columna en pantallas muy pequeñas */
+      .partners__logos { grid-template-columns: 1fr; max-width: 260px; margin: 0 auto; }
+      .partner__logo-card { height: 90px; }
+
+      /* Botones */
+      .btn { font-size: .875rem; padding: 12px 22px; }
+
+      /* Tipografía */
+      .section__title { font-size: 1.5rem; }
+      .section__subtitle { font-size: .95rem; }
+
+      /* Services */
+      .service__card { padding: 24px 18px; }
+      .service__card-num { font-size: 2.5rem; }
+
+      /* Footer */
+      .footer__links { flex-direction: column; gap: 6px; }
     }
   </style>
 </head>
